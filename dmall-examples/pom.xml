@@ -17,6 +17,7 @@
 	<modules>
 		<module>dmall-spider</module>
 		<module>dmall-java</module>
+		<module>dmall-dubbo</module>
 	</modules>
 
 	<build>
@@ -31,6 +32,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
