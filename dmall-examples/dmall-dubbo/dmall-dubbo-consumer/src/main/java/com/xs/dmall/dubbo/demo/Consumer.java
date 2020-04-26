@@ -2,10 +2,6 @@ package com.xs.dmall.dubbo.demo;
 
 import com.xs.dmall.dubbo.service.DemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.xs.dmall.dubbo.service.DemoService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 public class Consumer {
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:dubbo-consumer.xml"});
