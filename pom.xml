@@ -63,6 +63,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- 项目依赖 -->
+            <dependency>
+                <groupId>com.xs.dmall</groupId>
+                <artifactId>dmall-dependencies</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- Spring Dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -110,6 +119,8 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 

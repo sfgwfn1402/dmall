@@ -18,6 +18,7 @@
 		<module>dmall-spider</module>
 		<module>dmall-java</module>
 		<module>dmall-dubbo</module>
+		<module>dmall-RPC</module>
 	</modules>
 
 	<build>
