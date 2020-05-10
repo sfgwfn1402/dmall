@@ -16,4 +16,9 @@ public class ChannelHandlerAdapter implements ChannelHandler {
     public void received(Channel channel, Object message) {
 
     }
+
+    @Override
+    public void sent(Channel channel, Object message) {
+
+    }
 }

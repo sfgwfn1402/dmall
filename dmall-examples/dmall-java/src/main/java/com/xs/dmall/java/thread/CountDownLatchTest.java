@@ -22,9 +22,8 @@ public class CountDownLatchTest {
         System.out.println("主线程开始执行…… ……");
 
         //第一个子线程执行
-        ExecutorService es1 = Executors.newSingleThreadExecutor();
         //org.apache.commons.lang3.concurrent.BasicThreadFactory
-        ScheduledExecutorService es11 = new ScheduledThreadPoolExecutor(1,
+        ScheduledExecutorService es1 = new ScheduledThreadPoolExecutor(1,
                 new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
 
         es1.execute(new Runnable() {

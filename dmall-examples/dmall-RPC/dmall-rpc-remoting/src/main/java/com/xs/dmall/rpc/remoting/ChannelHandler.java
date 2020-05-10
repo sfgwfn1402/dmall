@@ -19,4 +19,11 @@ public interface ChannelHandler {
      */
     void received(Channel channel, Object message);
 
+    /**
+     * on message sent
+     * @param channel
+     * @param message
+     */
+    void sent(Channel channel, Object message);
+
 }

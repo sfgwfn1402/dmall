@@ -4,6 +4,7 @@ import com.xs.dmall.rpc.common.utils.StringUtils;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -39,6 +40,11 @@ public class URL implements Serializable {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
+
+    public InetSocketAddress toInetSocketAddress(){
+        return new InetSocketAddress(host, port);
+    }
+
     public String getHost() {
         return host;
     }

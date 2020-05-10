@@ -46,6 +46,21 @@ public abstract class AbstractPeer implements ChannelHandler {
         handler.received(channel, message);
     }
 
+    @Override
+    public void sent(Channel channel, Object message) {
+        if(closed){
+            return;
+        }
+        handler.sent(channel, message);
+    }
+
+    /**
+     * close the channel
+     */
+    public void close(){
+        closed = true;
+    }
+
     public URL getUrl() {
         return url;
     }
