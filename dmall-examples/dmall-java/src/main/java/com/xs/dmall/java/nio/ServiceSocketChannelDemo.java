@@ -2,7 +2,6 @@
 //
 //import org.xnio.Buffers;
 //
-//import java.nio.Buffer;
 //import java.io.IOException;
 //import java.net.InetSocketAddress;
 //import java.nio.ByteBuffer;
@@ -17,8 +16,10 @@
 //import java.util.Set;
 //
 //
-///*服务器端，:接收客户端发送过来的数据并显示，
-// *服务器把上接收到的数据加上"echo from service:"再发送回去*/
+///**
+// * 服务器端，:接收客户端发送过来的数据并显示，
+// * 服务器把上接收到的数据加上"echo from service:"再发送回去
+// */
 //public class ServiceSocketChannelDemo {
 //
 //    public static class TCPEchoServer implements Runnable {
