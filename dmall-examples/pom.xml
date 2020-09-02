@@ -19,6 +19,7 @@
 		<module>dmall-java</module>
 		<module>dmall-dubbo</module>
 		<module>dmall-RPC</module>
+		<module>dmall-dtm</module>
 	</modules>
 
 	<build>

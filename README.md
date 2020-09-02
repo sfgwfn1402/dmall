@@ -1,186 +1,197 @@
-# Nacos Config Example
+# mall
 
-## 项目说明
+<p>
+  <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
+  <a href="https://github.com/macrozheng/mall-learning"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B-mall--learning-green.svg" alt="学习教程"></a>
+  <a href="https://github.com/macrozheng/mall-swarm"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/Cloud%E7%89%88%E6%9C%AC-mall--swarm-brightgreen.svg" alt="SpringCloud版本"></a>
+  <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
+  <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E4%BA%A4%E6%B5%81-%E5%BE%AE%E4%BF%A1%E7%BE%A4-2BA245.svg" alt="交流"></a>
+  <a href="http://qm.qq.com/cgi-bin/qm/qr?k=V6xu5c12j9qhnMUNdDRzakNxRKzOxibQ"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/QQ%E7%BE%A4-959351312-red.svg" alt="QQ群"></a>
+  <a href="https://gitee.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
+</p>
 
-本项目演示如何使用 Nacos Config Starter 完成 Spring Cloud 应用的配置管理。
+## 前言
 
-[Nacos](https://github.com/alibaba/Nacos) 是阿里巴巴开源的一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+`mall`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
 
-## 示例
+## 项目文档
 
-### 如何接入
-在启动示例进行演示之前，我们先了解一下 Spring Cloud 应用如何接入 Nacos Config。
-**注意 本章节只是为了便于您理解接入方式，本示例代码中已经完成接入工作，您无需再进行修改。**
+- 文档地址：[http://www.macrozheng.com](http://www.macrozheng.com)
+- 备用地址：[https://macrozheng.github.io/mall-learning](https://macrozheng.github.io/mall-learning)
 
-1. 首先，修改 pom.xml 文件，引入 Nacos Config Starter。
+## 项目介绍
 
-	    <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-	
-2. 在应用的 /src/main/resources/bootstrap.properties 配置文件中配置 Nacos Config 元数据
-	
-        spring.application.name=nacos-config-example
-        spring.cloud.nacos.config.server-addr=127.0.0.1:8848
-		  
-3. 完成上述两步后，应用会从 Nacos Config 中获取相应的配置，并添加在 Spring Environment 的 PropertySources 中。这里我们使用 @Value 注解来将对应的配置注入到 SampleController 的 userName 和 age 字段，并添加 @RefreshScope 打开动态刷新功能
-		
-		@RefreshScope
-		class SampleController {
-	
-    		@Value("${user.name}")
-    		String userName;
-	
-    		@Value("${user.age}")
-    		int age;
-		}
+`mall`项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现，采用Docker容器化部署。前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。
 
-### 启动 Nacos Server 并添加配置
+### 项目演示
 
-1. 首先需要获取 Nacos Server，支持直接下载和源码构建两种方式。**推荐使用最新版本 Nacos Server**
+#### 后台管理系统
 
-	1. 直接下载：[Nacos Server 下载页](https://github.com/alibaba/nacos/releases) 
-	2. 源码构建：进入 Nacos [Github 项目页面](https://github.com/alibaba/nacos)，将代码 git clone 到本地自行编译打包，[参考此文档](https://nacos.io/zh-cn/docs/quick-start.html)。
-	
-2. 启动 Server，进入下载到本地并解压完成后的文件夹(使用源码构建的方式则进入编译打包好的文件夹)，再进去其相对文件夹 nacos/bin，并对照操作系统实际情况执行如下命令。[详情参考此文档](https://nacos.io/zh-cn/docs/quick-start.html)。
-	
-	1. Linux/Unix/Mac 操作系统，执行命令 `sh startup.sh -m standalone`
-	2. Windows 操作系统，执行命令 `cmd startup.cmd`
+前端项目`mall-admin-web`地址：https://github.com/macrozheng/mall-admin-web
 
-3. 在命令行执行如下命令，向 Nacos Server 中添加一条配置。
-	
-		curl -X POST "http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos-config-example.properties&group=DEFAULT_GROUP&content=user.id=1%0Auser.name=james%0Auser.age=17"
-		
-	**注：你也可以使用其他方式添加，遵循 HTTP API 规范即可，若您使用的 Nacos 版本自带控制台，建议直接使用控制台进行配置**
-	
-	添加的配置的详情如下
-	
-		dataId 为 nacos-config-example.properties
-		group 为 DEFAULT_GROUP
-		
-		内容如下
-		
-			user.id=1
-			user.name=james
-			user.age=17	
+项目演示地址： [http://www.macrozheng.com/admin/index.html](http://www.macrozheng.com/admin/index.html)  
 
-### 应用启动
+![后台管理系统功能演示](http://img.macrozheng.com/mall/project/mall_admin_show.png)
 
-1. 增加配置，在应用的 /src/main/resources/application.properties 中添加基本配置信息
-	
-        server.port=18084
-        management.endpoints.web.exposure.include=*
+#### 前台商城系统
 
-		
-2. 启动应用，支持 IDE 直接启动和编译打包后启动。
+前端项目`mall-app-web`地址：敬请期待......
 
-	1. IDE直接启动：找到主类 `Application`，执行 main 方法启动应用。
-	2. 打包编译后启动：首先执行 `mvn clean package` 将工程编译打包，然后执行 `java -jar nacos-config-example.jar`启动应用。
+项目演示地址：[http://www.macrozheng.com/app/index.html](http://www.macrozheng.com/app/index.html)
 
-### 验证
+![前台商城系统功能演示](http://img.macrozheng.com/mall/project/mall_app_show.png)
 
-#### 验证自动注入
-在浏览器地址栏输入 `http://127.0.0.1:18084/user`，并点击调转，可以看到成功从 Nacos Config Server 中获取了数据。
+### 组织结构
 
-![get](https://cdn.nlark.com/lark/0/2018/png/54319/1536986328663-5e3503c2-7e14-4c56-b5f9-72fecc6898d2.png)
+``` lua
+mall
+├── mall-common -- 工具类及通用代码
+├── mall-mbg -- MyBatisGenerator生成的数据库操作代码
+├── mall-security -- SpringSecurity封装公用模块
+├── mall-admin -- 后台商城管理系统接口
+├── mall-search -- 基于Elasticsearch的商品搜索系统
+├── mall-portal -- 前台商城系统接口
+└── mall-demo -- 框架搭建时的测试代码
+```
 
-#### 验证动态刷新
-1. 执行如下命令，修改 Nacos Server 端的配置数据
+### 技术选型
 
-		curl -X POST "http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos-config-example.properties&group=DEFAULT_GROUP&content=user.id=1%0Auser.name=james%0Auser.age=18"
+#### 后端技术
 
-2. 在浏览器地址栏输入 `http://127.0.0.1:18084/user`，并点击调转，可以看到应用从 Nacos Server 中获取了最新的数据，age 变成了 18。
+| 技术                 | 说明                | 官网                                                 |
+| -------------------- | ------------------- | ---------------------------------------------------- |
+| SpringBoot           | 容器+MVC框架        | https://spring.io/projects/spring-boot               |
+| SpringSecurity       | 认证和授权框架      | https://spring.io/projects/spring-security           |
+| MyBatis              | ORM框架             | http://www.mybatis.org/mybatis-3/zh/index.html       |
+| MyBatisGenerator     | 数据层代码生成      | http://www.mybatis.org/generator/index.html          |
+| PageHelper           | MyBatis物理分页插件 | http://git.oschina.net/free/Mybatis_PageHelper       |
+| Swagger-UI           | 文档生产工具        | https://github.com/swagger-api/swagger-ui            |
+| Hibernator-Validator | 验证框架            | http://hibernate.org/validator                       |
+| Elasticsearch        | 搜索引擎            | https://github.com/elastic/elasticsearch             |
+| RabbitMQ             | 消息队列            | https://www.rabbitmq.com/                            |
+| Redis                | 分布式缓存          | https://redis.io/                                    |
+| MongoDB              | NoSql数据库         | https://www.mongodb.com                              |
+| Docker               | 应用容器引擎        | https://www.docker.com                               |
+| Druid                | 数据库连接池        | https://github.com/alibaba/druid                     |
+| OSS                  | 对象存储            | https://github.com/aliyun/aliyun-oss-java-sdk        |
+| MinIO                | 对象存储            | https://github.com/minio/minio                       |
+| JWT                  | JWT登录支持         | https://github.com/jwtk/jjwt                         |
+| LogStash             | 日志收集工具        | https://github.com/logstash/logstash-logback-encoder |
+| Lombok               | 简化对象封装工具    | https://github.com/rzwitserloot/lombok               |
+| Jenkins              | 自动化部署工具      | https://github.com/jenkinsci/jenkins                 |
 
-![refresh](https://cdn.nlark.com/lark/0/2018/png/54319/1536986336535-c0efdf6d-a5d3-4f33-8d26-fe3a36cdacf6.png)
+#### 前端技术
 
+| 技术       | 说明                  | 官网                                   |
+| ---------- | --------------------- | -------------------------------------- |
+| Vue        | 前端框架              | https://vuejs.org/                     |
+| Vue-router | 路由框架              | https://router.vuejs.org/              |
+| Vuex       | 全局状态管理框架      | https://vuex.vuejs.org/                |
+| Element    | 前端UI框架            | https://element.eleme.io               |
+| Axios      | 前端HTTP框架          | https://github.com/axios/axios         |
+| v-charts   | 基于Echarts的图表框架 | https://v-charts.js.org/               |
+| Js-cookie  | cookie管理工具        | https://github.com/js-cookie/js-cookie |
+| nprogress  | 进度条控件            | https://github.com/rstacruz/nprogress  |
 
-## 原理
+#### 架构图
 
+##### 系统架构图
 
-### Nacos Config 数据结构
+![系统架构图](http://img.macrozheng.com/mall/project/mall_micro_service_arch.jpg)
 
-Nacos Config 主要通过 dataId 和 group 来唯一确定一条配置，我们假定你已经了解此背景。如果不了解，请参考 [Nacos 文档](https://nacos.io/zh-cn/docs/concepts.html)。
+##### 业务架构图
 
-Nacos Client 从 Nacos Server 端获取数据时，调用的是此接口 `ConfigService.getConfig(String dataId, String group, long timeoutMs)`。
+![系统架构图](http://img.macrozheng.com/mall/project/mall_business_arch.png)
 
+#### 模块介绍
 
-### Spring Cloud 应用获取数据
+##### 后台管理系统 `mall-admin`
 
-#### dataID
+- 商品管理：[功能结构图-商品.jpg](document/resource/mind_product.jpg)
+- 订单管理：[功能结构图-订单.jpg](document/resource/mind_order.jpg)
+- 促销管理：[功能结构图-促销.jpg](document/resource/mind_sale.jpg)
+- 内容管理：[功能结构图-内容.jpg](document/resource/mind_content.jpg)
+- 用户管理：[功能结构图-用户.jpg](document/resource/mind_member.jpg)
 
-在 Nacos Config Starter 中，dataId 的拼接格式如下
+##### 前台商城系统 `mall-portal`
 
-	${prefix} - ${spring.profiles.active} . ${file-extension}
+[功能结构图-前台.jpg](document/resource/mind_portal.jpg)
 
-* `prefix` 默认为 `spring.application.name` 的值，也可以通过配置项 `spring.cloud.nacos.config.prefix`来配置。
+#### 开发进度
 
-* `spring.profiles.active` 即为当前环境对应的 profile，详情可以参考 [Spring Boot文档](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html#boot-features-profiles)
+![项目开发进度图](http://img.macrozheng.com/mall/project/mall_dev_flow.png)
 
-	**注意，当 activeprofile 为空时，对应的连接符 `-` 也将不存在，dataId 的拼接格式变成 `${prefix}`.`${file-extension}`**
+## 环境搭建
 
-* `file-extension` 为配置内容的数据格式，可以通过配置项 `spring.cloud.nacos.config.file-extension`来配置。
-目前只支持 `properties` 类型。
+### 开发工具
 
-#### group
-* `group` 默认为 `DEFAULT_GROUP`，可以通过 `spring.cloud.nacos.config.group` 配置。
+| 工具          | 说明                | 官网                                            |
+| ------------- | ------------------- | ----------------------------------------------- |
+| IDEA          | 开发IDE             | https://www.jetbrains.com/idea/download         |
+| RedisDesktop  | redis客户端连接工具 | https://github.com/qishibo/AnotherRedisDesktopManager  |
+| Robomongo     | mongo客户端连接工具 | https://robomongo.org/download                  |
+| SwitchHosts   | 本地host管理        | https://oldj.github.io/SwitchHosts/             |
+| X-shell       | Linux远程连接工具   | http://www.netsarang.com/download/software.html |
+| Navicat       | 数据库连接工具      | http://www.formysql.com/xiazai.html             |
+| PowerDesigner | 数据库设计工具      | http://powerdesigner.de/                        |
+| Axure         | 原型设计工具        | https://www.axure.com/                          |
+| MindMaster    | 思维导图设计工具    | http://www.edrawsoft.cn/mindmaster              |
+| ScreenToGif   | gif录制工具         | https://www.screentogif.com/                    |
+| ProcessOn     | 流程图绘制工具      | https://www.processon.com/                      |
+| PicPick       | 图片处理工具        | https://picpick.app/zh/                         |
+| Snipaste      | 屏幕截图工具        | https://www.snipaste.com/                       |
+| Postman       | API接口调试工具      | https://www.postman.com/                        |
+| Typora        | Markdown编辑器      | https://typora.io/                              |
 
+### 开发环境
 
-### 自动注入
-Nacos Config Starter 实现了 `org.springframework.cloud.bootstrap.config.PropertySourceLocator`接口，并将优先级设置成了最高。
+| 工具          | 版本号 | 下载                                                         |
+| ------------- | ------ | ------------------------------------------------------------ |
+| JDK           | 1.8    | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
+| Mysql         | 5.7    | https://www.mysql.com/                                       |
+| Redis         | 5.0    | https://redis.io/download                                    |
+| MongoDB       | 4.2.5  | https://www.mongodb.com/download-center                      |
+| RabbitMQ      | 3.7.14 | http://www.rabbitmq.com/download.html                        |
+| Nginx         | 1.10   | http://nginx.org/en/download.html                            |
+| Elasticsearch | 7.6.2  | https://www.elastic.co/downloads/elasticsearch               |
+| Logstash      | 7.6.2  | https://www.elastic.co/cn/downloads/logstash                 |
+| Kibana        | 7.6.2  | https://www.elastic.co/cn/downloads/kibana                   |
 
-在 Spring Cloud 应用启动阶段，会主动从 Nacos Server 端获取对应的数据，并将获取到的数据转换成 PropertySource 且注入到 Environment 的 PropertySources 属性中，所以使用 @Value 注解也能直接获取 Nacos Server 端配置的内容。
+### 搭建步骤
 
-### 动态刷新
+> Windows环境部署
 
-Nacos Config Starter 默认为所有获取数据成功的 Nacos 的配置项添加了监听功能，在监听到服务端配置发生变化时会实时触发 `org.springframework.cloud.context.refresh.ContextRefresher` 的 refresh 方法 。
-		
-如果需要对 Bean 进行动态刷新，请参照 Spring 和 Spring Cloud 规范。推荐给类添加 `@RefreshScope` 或 `@ConfigurationProperties ` 注解，
+- Windows环境搭建请参考：[mall在Windows环境下的部署](http://www.macrozheng.com/#/deploy/mall_deploy_windows);
+- 注意：只启动mall-admin,仅需安装Mysql、Redis即可;
+- 克隆`mall-admin-web`项目，并导入到IDEA中完成编译：[前端项目地址](https://github.com/macrozheng/mall-admin-web);
+- `mall-admin-web`项目的安装及部署请参考：[mall前端项目的安装与部署](http://www.macrozheng.com/#/deploy/mall_deploy_web)。
 
-更多详情请参考 [ContextRefresher Java Doc](http://static.javadoc.io/org.springframework.cloud/spring-cloud-context/2.0.0.RELEASE/org/springframework/cloud/context/refresh/ContextRefresher.html)。
+> Docker环境部署
 
-	
+- 使用虚拟机安装CentOS7.6请参考：[虚拟机安装及使用Linux，看这一篇就够了](http://www.macrozheng.com/#/reference/linux_install);
+- Docker环境的安装请参考：[开发者必备Docker命令](http://www.macrozheng.com/#/reference/docker);
+- 本项目Docker镜像构建请参考：[使用Maven插件为SpringBoot应用构建Docker镜像](http://www.macrozheng.com/#/reference/docker_maven);
+- 本项目在Docker容器下的部署请参考：[mall在Linux环境下的部署（基于Docker容器）](http://www.macrozheng.com/#/deploy/mall_deploy_docker);
+- 本项目使用Docker Compose请参考： [mall在Linux环境下的部署（基于Docker Compose）](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose);
+- 本项目在Linux下的自动化部署请参考：[mall在Linux环境下的自动化部署（基于Jenkins）](http://www.macrozheng.com/#/deploy/mall_deploy_jenkins);
 
+> 相关环境部署
 
-## Endpoint 信息查看
+- ELK日志收集系统的搭建请参考：[SpringBoot应用整合ELK实现日志收集](http://www.macrozheng.com/#/technology/mall_tiny_elk);
+- 使用MinIO存储文件请参考：[前后端分离项目，如何优雅实现文件存储](http://www.macrozheng.com/#/technology/minio_use);
+- 读写分离解决方案请参考：[你还在代码里做读写分离么，试试这个中间件吧](http://www.macrozheng.com/#/reference/gaea);
+- Redis集群解决方案请参考：[Docker环境下秒建Redis集群，连SpringBoot也整上了！](http://www.macrozheng.com/#/reference/redis_cluster)。
 
-Spring Boot 应用支持通过 Endpoint 来暴露相关信息，Nacos Config Starter 也支持这一点。
+## 公众号
 
-在使用之前需要在 maven 中添加 `spring-boot-starter-actuator`依赖，并在配置中允许 Endpoints 的访问。
+mall项目全套学习教程连载中，关注公众号「**macrozheng**」第一时间获取。
 
-* Spring Boot 1.x 中添加配置 management.security.enabled=false
-* Spring Boot 2.x 中添加配置 management.endpoints.web.exposure.include=*
+加微信群交流，公众号后台回复「**加群**」即可。
 
-Spring Boot 1.x 可以通过访问 http://127.0.0.1:18084/nacos_config 来查看 Nacos Endpoint 的信息。
+![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
 
-Spring Boot 2.x 可以通过访问 http://127.0.0.1:18084/actuator/nacos-config 来访问。
+## 许可证
 
-![actuator](https://cdn.nlark.com/lark/0/2018/png/54319/1536986344822-279e1edc-ebca-4201-8362-0ddeff240b85.png)
+[Apache License 2.0](https://github.com/macrozheng/mall/blob/master/LICENSE)
 
-如上图所示，Sources 表示此客户端从哪些 Nacos Config 配置项中获取了信息，RefreshHistory 表示动态刷新的历史记录，最多保存20条，NacosConfigProperties 则为 Nacos Config Starter 本身的配置。
-    	
-## More
-
-#### 更多配置项
-配置项|key|默认值|说明
-----|----|-----|-----
-服务端地址|spring.cloud.nacos.config.server-addr||
-DataId前缀|spring.cloud.nacos.config.prefix||spring.application.name
-Group|spring.cloud.nacos.config.group|DEFAULT_GROUP|
-dataID后缀及内容文件格式|spring.cloud.nacos.config.file-extension|properties|dataId的后缀，同时也是配置内容的文件格式，目前只支持 properties
-配置内容的编码方式|spring.cloud.nacos.config.encode|UTF-8|配置的编码
-获取配置的超时时间|spring.cloud.nacos.config.timeout|3000|单位为 ms
-配置的命名空间|spring.cloud.nacos.config.namespace||常用场景之一是不同环境的配置的区分隔离，例如开发测试环境和生产环境的资源隔离等。
-AccessKey|spring.cloud.nacos.config.access-key||
-SecretKey|spring.cloud.nacos.config.secret-key||
-相对路径|spring.cloud.nacos.config.context-path||服务端 API 的相对路径
-接入点|spring.cloud.nacos.config.endpoint|UTF-8|地域的某个服务的入口域名，通过此域名可以动态地拿到服务端地址
-是否开启监听和自动刷新|spring.cloud.nacos.config.refresh.enabled|true|
-
-
-
-#### 更多介绍
-Nacos为用户提供包括动态服务发现，配置管理，服务管理等服务基础设施，帮助用户更灵活，更轻松地构建，交付和管理他们的微服务平台，基于Nacos, 用户可以更快速的构建以“服务”为中心的现代云原生应用。Nacos可以和Spring Cloud、Kubernetes/CNCF、Dubbo 等微服务生态无缝融合，为用户提供更卓越的体验。更多 Nacos 相关的信息，请参考 [Nacos 项目](https://github.com/alibaba/Nacos)。
-
-如果您对 Spring Cloud Nacos Config Starter 有任何建议或想法，欢迎在 issue 中或者通过其他社区渠道向我们提出。
-
+Copyright (c) 2018-2020 macrozheng

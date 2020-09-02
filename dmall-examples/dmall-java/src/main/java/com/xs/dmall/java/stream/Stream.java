@@ -1,9 +1,11 @@
 package com.xs.dmall.java.stream;
 
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Stream {
     /**
@@ -37,6 +39,82 @@ public class Stream {
         // Stream<T> filter(Predicate<? super T> predicate);
         users.stream().filter(user -> user.getAge() > 18).forEach(System.out::println);
     }
+
+    @Test
+    public void listToMap() {
+        List<Apple> appleList = new ArrayList<>();//存放apple对象集合
+
+        Apple apple1 = new Apple(1, "苹果1", new BigDecimal("3.25"), 10);
+        Apple apple12 = new Apple(1, "苹果2", new BigDecimal("1.35"), 20);
+        Apple apple2 = new Apple(2, "香蕉", new BigDecimal("2.89"), 30);
+        Apple apple3 = new Apple(3, "荔枝", new BigDecimal("9.99"), 40);
+
+        appleList.add(apple1);
+        appleList.add(apple12);
+        appleList.add(apple2);
+        appleList.add(apple3);
+        Map<Integer, Apple> appleMap = appleList.stream().collect(Collectors.toMap(Apple::getId, a -> a, (k1, k2) -> k1));
+        System.out.println(appleMap);
+    }
+
+    @Test
+    public void findFirst(){
+        List<Integer> integers = Lists.newArrayList(1,2,3);
+        Optional<Integer> o = integers.stream().filter(item -> item.equals(9)).findFirst();
+        if (o == null || !o.isPresent()) {
+            System.out.println("没有找到值");
+            return;
+        }
+        System.out.println(o.get());
+    }
+
+
+    class Apple {
+        private Integer id;
+        private String name;
+        private BigDecimal money;
+        private Integer num;
+
+        public Apple(Integer id, String name, BigDecimal money, Integer num) {
+            this.id = id;
+            this.name = name;
+            this.money = money;
+            this.num = num;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public BigDecimal getMoney() {
+            return money;
+        }
+
+        public void setMoney(BigDecimal money) {
+            this.money = money;
+        }
+
+        public Integer getNum() {
+            return num;
+        }
+
+        public void setNum(Integer num) {
+            this.num = num;
+        }
+    }
+
 }
 
 
