@@ -41,6 +41,14 @@ public class Stream {
     }
 
     @Test
+    public void allMatch(){
+        List<String> l = Lists.newArrayList("1");
+        boolean f = Optional.ofNullable(l).orElse(Lists.newArrayList()).stream()
+                .allMatch(odo -> "2".equals(odo));
+        System.out.println(f);
+    }
+
+    @Test
     public void listToMap() {
         List<Apple> appleList = new ArrayList<>();//存放apple对象集合
 
