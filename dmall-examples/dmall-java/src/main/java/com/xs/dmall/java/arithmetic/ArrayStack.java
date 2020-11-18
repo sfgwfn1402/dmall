@@ -2,6 +2,15 @@ package com.xs.dmall.java.arithmetic;
 
 /**
  * 数组栈
+ *
+ * 数组栈结构：
+ * 0，1，2，3，4，5
+ * 出栈从最后面一个元素出，表示后进先出操作。
+ *
+ * 其他：
+ * 链表栈结构
+ * head -> 1 ->3 ->5 -> tail
+ * 入栈从head入，出栈从head出
  */
 public class ArrayStack<E> {
 

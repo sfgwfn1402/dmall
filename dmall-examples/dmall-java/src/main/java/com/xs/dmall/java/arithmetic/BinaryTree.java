@@ -10,6 +10,26 @@ import java.util.concurrent.ThreadLocalRandom;
  * 先序/根遍历DLR：根   左子树     右子树
  * 中序/根遍历LDR：左子树   根     右子树
  * 后根/序遍历LRD：左子树     右子树  根
+ *
+ * 总结
+ *
+
+     1. 二叉树算法设计的总路线：把当前节点要做的事做好，其他的交给递归框架，不用当前节点操心。
+     2. 如果当前节点会对下面的子节点有整体影响，可以通过辅助函数增长参数列表，借助参数传递信息。
+     3. 在二叉树框架之上，扩展出一套 BST 遍历框架：
+
+     void BST(TreeNode root, int target) {
+     if (root.val == target)
+     // 找到目标，做点什么
+     if (root.val < target)
+     BST(root.right, target);
+     if (root.val > target)
+     BST(root.left, target);
+     }
+
+     4. 掌握了 BST 的基本操作。
+
+ *
  */
 public class BinaryTree {
 
@@ -129,6 +149,62 @@ public class BinaryTree {
     }
 
     /**
+     * 删除一个节点
+     * 框架先行，先找再改
+     *
+     * @param root
+     * @param value
+     * @return
+     */
+    public Node delete(Node root, int value) {
+        if (root == null) {
+            return null;
+        }
+        if (root.data == value) {
+            //进行删除操作
+            //情况1：value所在节点恰好是末端节点，两个子节点都为空，那么它可以当场去世了。
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+            //情况2：value所在节点只有一个非空子节点，那么它要让这个孩子接替自己的位置
+            if (root.left == null) {
+                return root.right;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+            //情况3：有两个子节点，麻烦了，为了不破坏 BST 的性质，该值的节点必须找到左子树中最大的那个节点，或者右子树中最小的那个节点来接替自己。
+            //找到右子树的最小节点
+            Node minNode = getMin(root.right);
+            //把root改成minNode
+            root.data = minNode.data;//一般不会通过 root.val = minNode.val 修改节点内部的值来交换节点，而是通过一系列略微复杂的链表操作交换 root 和 minNode 两个节点
+            //转而去删除minNode
+            root.right = delete(root.right, minNode.data);
+
+        } else if (root.data > value) {//当前节点数据比要删除的数据大，左查询
+            root.left = delete(root.left, value);
+        } else if (root.data < value) {
+            root.right = delete(root.right, value);
+        }
+        return root;
+    }
+
+    /**
+     * 获取值最小的节点
+     *
+     * @param node
+     * @return
+     */
+    private Node getMin(Node node) {
+        //BST最左边的就是最小的
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+
+    /**
      * 判断两棵树是否完全相同
      *
      * @param root1 树1
@@ -136,16 +212,19 @@ public class BinaryTree {
      * @return
      */
     boolean isSameTree(Node root1, Node root2) {
+        //都为空，显然相同
         if (root1 == null && root2 == null) {
             return true;
         }
+        //一个为空，一个非空，显然不同
         if (root1 == null || root2 == null) {
             return false;
         }
+        //两个都非空，但val不一样也不行
         if (root1.data != root2.data) {
             return false;
         }
-
+        //root1和root2该比的都比完了
         return isSameTree(root1.left, root2.left) && isSameTree(root1.right, root2.right);
     }
 

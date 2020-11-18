@@ -1,5 +1,6 @@
 package com.xs.dmall.java.arithmetic;
 
+
 import com.alibaba.fastjson.JSON;
 
 import java.util.Random;
@@ -144,14 +145,14 @@ public class Heap {
             Random random = new Random();
             heap.insert(random.nextInt(100));
         }
-        System.out.printf("堆数据：%s\n", JSON.toJSONString(heap.a));
+//        System.out.printf("堆数据：%s\n", JSON.toJSONString(heap.a));
         System.out.println("移除最大元素");
         int x = heap.count;
         for (int j = 0; j < x; j++) {
             heap.removeMax();
-            System.out.printf("堆数据：%s\n", JSON.toJSONString(heap.a));
+//            System.out.printf("堆数据：%s\n", JSON.toJSONString(heap.a));
         }
-        System.out.printf("堆数据：%s", JSON.toJSONString(heap.a));
+//        System.out.printf("堆数据：%s", JSON.toJSONString(heap.a));
     }
 
 }
