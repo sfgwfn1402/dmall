@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.george.springcloud.alibaba.dao.StorageDao">
 
-    <resultMap id="BaseResultMap" type="com.xs.dmall.seata.domain.Storage">
+    <resultMap id="BaseResultMap" type="com.xs.dmall.seata.storage.domain.Storage">
         <id column="id" property="id" jdbcType="BIGINT"></id>
         <result column="product_id" property="productId" jdbcType="BIGINT"></result>
         <result column="total" property="total" jdbcType="INTEGER"></result>

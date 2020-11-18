@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.george.springcloud.com.xs.dmall.seata.dao.OrderDao">
+<mapper namespace="com.xs.dmall.seata.order.dao.OrderDao">
 
-    <resultMap id="BaseResultMap" type="com.george.springcloud.alibaba.domain.Order">
+    <resultMap id="BaseResultMap" type="com.xs.dmall.seata.order.domain.Order">
         <id column="id" property="id" jdbcType="BIGINT"></id>
         <result column="user_id" property="userId" jdbcType="BIGINT"></result>
         <result column="product_id" property="productId" jdbcType="BIGINT"></result>
