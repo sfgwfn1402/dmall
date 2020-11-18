@@ -7,6 +7,7 @@ import com.xs.dmall.rpc.remoting.ChannelHandler;
 import com.xs.dmall.rpc.remoting.transport.AbstractChannel;
 import io.netty.channel.Channel;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -67,5 +68,35 @@ final class NettyChannel extends AbstractChannel {
             }
         }
         return nettyChannel;
+    }
+
+    /**
+     * get remote address
+     *
+     * @return
+     */
+    @Override
+    public InetSocketAddress getRemoteAddress() {
+        return null;
+    }
+
+    /**
+     * is connected
+     *
+     * @return
+     */
+    @Override
+    public boolean isConnected() {
+        return false;
+    }
+
+    /**
+     * send message.
+     *
+     * @param message
+     */
+    @Override
+    public void send(Object message) {
+
     }
 }
