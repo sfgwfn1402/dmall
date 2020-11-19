@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020-09-27 11:49
  */
 @Configuration
-@MapperScan("com.george.springcloud.com.xs.dmall.seata.dao")
+@MapperScan("com.xs.dmall.seata.order.dao")
 public class MyBatisConfig {
 }

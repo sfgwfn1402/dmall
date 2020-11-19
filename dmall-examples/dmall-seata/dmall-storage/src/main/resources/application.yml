@@ -14,9 +14,9 @@ spring:
         server-addr: localhost:8848
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seata_storage?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/db2?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
     username: root
-    password: 6yhn^YHN
+    password: orcl
 #    type: com.alibaba.druid.pool.DruidDataSource
 feign:
   hystrix:
