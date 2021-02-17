@@ -3,6 +3,11 @@ spring:
     name: dmall-search
   profiles:
     active: dev #默认为开发环境
+  security:
+    user:
+      name: dw
+      password: 123456
+      roles: SUPERADMIN
 
 server:
   port: 8081
@@ -13,21 +18,15 @@ mybatis:
     - classpath*:com/**/mapper/*.xml
 
 management:
-  security:
-    user:
-      name: dw
-      password: hello123
-      roles: ADMIN
   endpoint:
+    web:
+      exposure:
+        include: "*" # 公开节点
+    #        exclude: env, beans #禁用节点
     shutdown:
       enabled: true
-  server:
-    port: 9090
-endpoints:
-  health:
-    show-details: always
-  httptrace:
-    enabled: true
-  web:
-    exposure:
-      include: "*"
+    health:
+      show-details: always
+      httptrace:
+        enabled: true
+
