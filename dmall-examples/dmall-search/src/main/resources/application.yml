@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: dmall-search
+  profiles:
+    active: dev #默认为开发环境
+
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+
+management:
+  security:
+    user:
+      name: dw
+      password: hello123
+      roles: ADMIN
+  endpoint:
+    shutdown:
+      enabled: true
+  server:
+    port: 9090
+endpoints:
+  health:
+    show-details: always
+  httptrace:
+    enabled: true
+  web:
+    exposure:
+      include: "*"
